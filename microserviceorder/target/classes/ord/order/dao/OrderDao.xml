@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ord.order.dao.OrderDao">
+    <resultMap id="orderMap" type="ord.order.entity.Order">
+        <id column="ORDER_ID" jdbcType="VARCHAR" property="orderId"/>
+        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="CREATEDATE" jdbcType="DATE" property="createDate"/>
+        <result column="UPDATEDATE" jdbcType="DATE" property="updateDate"/>
+    </resultMap>
+    <sql id="results">
+        ORDER_ID,
+        USER_ID,
+        CREATEDATE,
+        UPDATEDATE
+    </sql>
+    <select id="queryOrderById" resultMap="orderMap">
+        SELECT <include refid="results"/> FROM C_ORDER WHERE ORDER_ID = #{orderId}
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: app-order
+  datasource:
+    url: jdbc:mysql://localhost:3306/clouddemo
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  port: 8082
+
+mycloud:
+  item:
+    url: http://app-item/cloud/item/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@127.0.0.1:9090/eureka,http://root:123456@127.0.0.1:9091/eureka,http://root:123456@127.0.0.1:9191/eureka
+    register-with-eureka: true
+    fetch-registry: true
+#添加ribbon负载均衡策略
+#com.netflix.loadbalancer.RandomRule随机
+#com.netflix.loadbalancer.RoundRobinRule轮询
+#com.netflix.loadbalancer.PredicateBasedRule默认策略，综合判断server所在的区的性能和server的可用性
+#serviceid.ribbon.NFLoadBalancerRuleClassName=负载均衡策略
+app-item:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

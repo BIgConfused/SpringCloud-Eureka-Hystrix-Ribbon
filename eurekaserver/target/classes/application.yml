@@ -1,0 +1,22 @@
+#服务名称
+spring:
+  application:
+    name: eureka-server
+  security:
+    user:
+      name: root
+      password: 123456
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    prefer-ip-address: true #将自己的ip地址注册到Eureka服务中
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:9091/eureka/ #,http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:9191/eureka/
+    ####是否将自己注册到Eureka服务站，因为该应用本身就是注册中心，所用不需要再注册自己(集群时候为true)
+    register-with-eureka: true
+    ####是否从Eureka中获取注册信息，因为自己注册中心，不会在该应用中检索服务信息
+    fetch-registry: true
+#服务端口号
+server:
+  port: 9090

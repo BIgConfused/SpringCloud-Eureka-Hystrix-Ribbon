@@ -1,0 +1,18 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: eureka-server
+  security:
+    user:
+      name: root
+      password: 123456
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:9090/eureka/ #,http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:9191/eureka/
+    register-with-eureka: true
+    fetch-registry: true

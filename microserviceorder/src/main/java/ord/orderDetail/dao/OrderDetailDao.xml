@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ord.orderDetail.dao.OrderDetailDao">
+    <resultMap id="orderDetailMap" type="ord.orderDetail.entity.OrderDetail">
+        <id column="ORDER_DETAIL_ID" jdbcType="VARCHAR" property="orderDetailId"/>
+        <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId"/>
+        <result column="ITEM_ID" jdbcType="VARCHAR" property="itemId"/>
+    </resultMap>
+    <sql id="results">
+        ORDER_DETAIL_ID,
+        ORDER_ID,
+        ITEM_ID
+    </sql>
+    <select id="queryOrderDetails" resultMap="orderDetailMap">
+        SELECT <include refid="results"/> FROM C_ORDER_DETAIL WHERE ORDER_ID = #{orderId}
+    </select>
+</mapper>
